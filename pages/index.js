@@ -33,14 +33,11 @@ export default function Home() {
   const onSubmit = async (values) => {
     setLoading(true);
     try {
-      const req = await axios.get(
-        "https://countrynomics-api.herokuapp.com/api/economics",
-        {
-          params: {
-            country: values.country,
-          },
-        }
-      );
+      const req = await axios.get("https://countrynomics-api.herokuapp.com/api/economics", {
+        params: {
+          country: values.country,
+        },
+      });
       setCountryKpi(req.data.kpis);
       setLoading(false);
       toast.success(`Economics of ${country} retrieved!`);
@@ -76,11 +73,7 @@ export default function Home() {
         <Heading>{country}</Heading>
         <form onSubmit={handleSubmit(onSubmit)}>
           <HStack spacing="12px" alignItems="center">
-            <Input
-              ref={register()}
-              onChange={(e) => setCountry(e.target.value)}
-              name="country"
-            />
+            <Input ref={register()} onChange={(e) => setCountry(e.target.value)} name="country" />
             <Button
               rightIcon={<ArrowForwardIcon />}
               isLoading={loading}
@@ -114,7 +107,7 @@ const EconomicsTable = ({ countryKpi }) => (
       <Tbody>
         {countryKpi?.map((kpi) => {
           const isPercentage = kpi.overview.includes("%");
-          console.log(isPercentage, typeof kpi.overview);
+          // console.log(isPercentage, typeof kpi.overview);
           return (
             <Tr>
               <Td>
